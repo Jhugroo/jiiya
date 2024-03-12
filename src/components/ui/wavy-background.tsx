@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cn } from "~/utils/cn";
 import React, { useEffect, useRef, useState } from "react";
 import { createNoise3D } from "simplex-noise";
@@ -47,6 +51,7 @@ export const WavyBackground = ({
 
     const init = () => {
         canvas = canvasRef.current;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         ctx = canvas.getContext("2d");
         w = ctx.canvas.width = window.innerWidth;
         h = ctx.canvas.height = window.innerHeight;
@@ -71,10 +76,10 @@ export const WavyBackground = ({
         nt += getSpeed();
         for (i = 0; i < n; i++) {
             ctx.beginPath();
-            ctx.lineWidth = waveWidth || 50;
+            ctx.lineWidth = waveWidth ?? 50;
             ctx.strokeStyle = waveColors[i % waveColors.length];
             for (x = 0; x < w; x += 5) {
-                var y = noise(x / 800, 0.3 * i, nt) * 100;
+                const y = noise(x / 800, 0.3 * i, nt) * 100;
                 ctx.lineTo(x, y + h * 0.5); // adjust for height, currently at 50% of the container
             }
             ctx.stroke();
@@ -84,7 +89,7 @@ export const WavyBackground = ({
 
     let animationId: number;
     const render = () => {
-        ctx.fillStyle = backgroundFill || "black";
+        ctx.fillStyle = backgroundFill ?? "black";
         ctx.globalAlpha = waveOpacity || 0.5;
         ctx.fillRect(0, 0, w, h);
         drawWave(5);
@@ -96,6 +101,7 @@ export const WavyBackground = ({
         return () => {
             cancelAnimationFrame(animationId);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const [isSafari, setIsSafari] = useState(false);

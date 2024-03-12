@@ -1,11 +1,6 @@
-import { type Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme";
-const defaultTheme = require("tailwindcss/defaultTheme");
 
-const colors = require("tailwindcss/colors");
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
+import { type Config } from "tailwindcss";
+
 export default {
   content: ["./src/**/*.{ts,tsx}"],
   darkMode: "class",
@@ -33,11 +28,11 @@ export default {
         },
         spotlight: {
           "0%": {
-            opacity: 0,
+            opacity: "0",
             transform: "translate(-72%, -62%) scale(0.5)",
           },
           "100%": {
-            opacity: 1,
+            opacity: "1",
             transform: "translate(-50%,-40%) scale(1)",
           },
         },
@@ -82,15 +77,5 @@ export default {
       },
     },
   },
-  plugins: [addVariablesForColors],
+  plugins: [],
 } satisfies Config;
-function addVariablesForColors({ addBase, theme }: any) {
-  let allColors = flattenColorPalette(theme("colors"));
-  let newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-  );
-
-  addBase({
-    ":root": newVars,
-  });
-}

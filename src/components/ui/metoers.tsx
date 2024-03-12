@@ -1,5 +1,4 @@
 import { cn } from "~/utils/cn";
-import clsx from "clsx";
 import React from "react";
 
 export const Meteors = ({
@@ -9,7 +8,7 @@ export const Meteors = ({
     number?: number;
     className?: string;
 }) => {
-    const meteors = new Array(number || 20).fill(true);
+    const meteors = new Array(number ?? 20).fill(true);
     return (
         <>
             {meteors.map((el, idx) => (

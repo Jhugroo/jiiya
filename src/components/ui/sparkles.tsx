@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
@@ -30,7 +33,7 @@ export const SparklesCore = (props: ParticlesProps) => {
     } = props;
     const [init, setInit] = useState(false);
     useEffect(() => {
-        initParticlesEngine(async (engine) => {
+        void initParticlesEngine(async (engine) => {
             await loadSlim(engine);
         }).then(() => {
             setInit(true);
@@ -41,7 +44,7 @@ export const SparklesCore = (props: ParticlesProps) => {
     const particlesLoaded = async (container?: Container) => {
         if (container) {
             console.log(container);
-            controls.start({
+            void controls.start({
                 opacity: 1,
                 transition: {
                     duration: 1,

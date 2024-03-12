@@ -10,9 +10,9 @@ export const TextGenerateEffect = ({
     className?: string;
 }) => {
     const [scope, animate] = useAnimate();
-    let wordsArray = words.split(" ");
+    const wordsArray = words.split(" ");
     useEffect(() => {
-        animate(
+        void animate(
             "span",
             {
                 opacity: 1,
